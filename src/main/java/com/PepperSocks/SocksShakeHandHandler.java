@@ -38,6 +38,7 @@ public class SocksShakeHandHandler extends SimpleChannelInboundHandler<SocksRequ
          * 5.然后代理程序开始充当客户端与远端之间的中介进行通讯。
          **/
         switch (msg.requestType()) {
+            case UNKNOWN:
             case INIT:
                 System.out.println("Init");
                 //Init阶段结束之后，客户端会发送CmdRequest，因此要准备解码。
@@ -61,9 +62,6 @@ public class SocksShakeHandHandler extends SimpleChannelInboundHandler<SocksRequ
                 } else {
                     ctx.close();
                 }
-                break;
-            case UNKNOWN:
-                ctx.close();
                 break;
             default:
                 break;
